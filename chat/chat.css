@@ -3,8 +3,8 @@ body {
 }
 
 #chat-container {
-    max-width: 400px;
-    margin: 50px auto;
+    max-width: 100%;
+    margin: 0px auto;
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
@@ -12,17 +12,20 @@ body {
 
 #chat-box {
     height: 300px;
+    width: 100%;
     overflow-y: scroll;
     padding: 10px;
     background-color: #f4f4f4;
 }
 
 #user-input {
-    width: 70%;
+    width: 82%;
     padding: 8px;
+    height: 100%;
+    position: relative;
 }
 
 button {
-    width: 28%;
+    width: 16%;
     padding: 8px;
 }
