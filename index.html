@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -7,12 +8,46 @@
     <link rel="stylesheet" href="style.css">
     <title>Proyecto EVA</title>
   </head>
+
+  <style>
+    
+    .boton {
+        padding:20px;
+
+        background-image: -webkit-linear-gradient(top, #eb94d0, #2079b0);     
+
+        -webkit-border-radius: 28;
+        -moz-border-radius: 28;
+        border-radius: 20px;
+        -webkit-box-shadow: 6px 5px 24px #666666;
+        -moz-box-shadow: 6px 5px 24px #666666;
+        box-shadow: 6px 5px 24px #666666;
+
+        color:rgb(255, 255, 255);
+        font:bold 12px/10px Arial;
+        width:110px;
+        cursor:pointer;
+        cursor:hand;
+        text-align:center;
+    }
+    .boton:hover {
+    background: #2079b0;
+    background-image: -webkit-linear-gradient(top, #2079b0, #eb94d0);
+    text-decoration: none;
+   }
+
+    #boton1 {
+        position:absolute;
+        left: 46%;
+        top: 85%;
+        
+    }
+</style>
+
   <body>
     <div class="container">
-        <img src="/img/logo_eva.png" alt="EVA" class="logo">
-        <button onclick="irAChat()">Comenzar</button>
+      <img src="/img/logo_eva.png" alt="EVA" class="logo">
     </div>
-
-    <script src="main.js"></script>
+    <input id="boton1" class="boton" type="button" value="Comenzar" onclick="irAChat()" />
 </body>
 </html>
