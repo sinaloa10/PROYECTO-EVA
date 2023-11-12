@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Elementos del DOM
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
-
-    const API_KEY = "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";
+    appendMessage('EVA', 'Inicia una conversación con EVA');
+    const API_KEY = "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";
 
     async function getCompletion(messages) {
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
@@ -53,9 +53,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Función para agregar mensajes al cuadro de chat
     function appendMessage(sender, message) {
+        var messageContainer = document.createElement('div');
+        messageContainer.classList.add('message-container');
+
         var messageElement = document.createElement('div');
-        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
-        chatBox.appendChild(messageElement);
+        messageElement.classList.add(sender === 'Usuario' ? 'user-message' : 'bot-message');
+
+        var bubbleElement = document.createElement('div');
+        bubbleElement.classList.add('message-bubble', sender === 'Usuario' ? 'user-bubble' : 'bot-bubble');
+
+        bubbleElement.innerHTML = message;
+        messageElement.appendChild(bubbleElement);
+        messageContainer.appendChild(messageElement);
+
+        chatBox.appendChild(messageContainer);
         // Hacer scroll hacia abajo para mostrar el último mensaje
         chatBox.scrollTop = chatBox.scrollHeight;
     }
