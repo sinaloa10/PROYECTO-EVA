@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
 
+
     async function getCompletion(prompt) {
         const response = await fetch(`https://api.openai.com/v1/completions`, {
             method: "POST",
