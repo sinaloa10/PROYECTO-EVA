@@ -101,7 +101,7 @@ body {
 .user-bubble {
     background-color: #af4c8c;
     color: white;
-    float: right;
+    text-align: left; /* Alinea el texto a la izquierda */
 }
 
 .bot-bubble {
