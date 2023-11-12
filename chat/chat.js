@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 messages: messages,
                 max_tokens: 2000, // Ajusta este valor según lo que consideres apropiado
             }),
-        }); 
+        });
 
         const data = await response.json();
         return data.choices[0].message.content; // Obtener el texto de la respuesta
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // Mostrar indicador de escritura progresiva mientras el bot responde
         showTypingIndicator();
 
-
         // Definir los mensajes del sistema y del usuario
         var messages = [
             {
@@ -82,18 +81,34 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
 
         // Llamar a la función de OpenAI para obtener la respuesta del modelo
-        var botResponse = await getCompletion(messages);
+        var botResponsePromise = getCompletion(messages);
 
-        var timer = setTimeout(function () {
-            // Acciones a realizar después de 15 segundos (por ejemplo, mostrar un mensaje especial)
+        // Configurar temporizador para 10 segundos
+        var timer = new Promise((_, reject) => {
+            setTimeout(() => {
+                reject('timeout');
+            }, 10000);
+        });
+
+        try {
+            // Esperar a que ocurra una de las dos promesas (respuesta del modelo o temporizador)
+            var result = await Promise.race([botResponsePromise, timer]);
+
+            // Limpiar el temporizador ya que la respuesta llegó a tiempo
+            clearTimeout(timer);
+
+            // Eliminar el indicador de escritura antes de mostrar la respuesta real
+            chatBox.lastChild.remove();
+
+            // Mostrar el mensaje del bot en el chat
+            appendMessage('EVA', result);
+        } catch (error) {
+            // Si se ejecuta este bloque, significa que el temporizador ha expirado
+            // Puedes mostrar un mensaje de error o realizar otra acción aquí
             appendMessage('EVA', 'Ha ocurrido un error en la respuesta, inténtalo de nuevo.');
-        }, 10000);
-
-        // Eliminar el indicador de escritura antes de mostrar la respuesta real
-        chatBox.lastChild.remove();
-
-        appendMessage('EVA', botResponse);
+        }
     }
+
 
 
 
