@@ -3,24 +3,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
 
-    //const API_KEY = "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";
+    const API_KEY = "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";
 
-    async function getCompletion(prompt) {
-        const response = await fetch(`https://api.openai.com/v1/completions`, {
+    async function getCompletion(messages) {
+        const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${API_KEY}`,
             },
             body: JSON.stringify({
-                model: "text-davinci-003",
-                prompt: prompt,
-                max_tokens: 200,
+                model: "gpt-3.5-turbo",
+                messages: messages,
+                max_tokens: 150, // Ajusta este valor según lo que consideres apropiado
             }),
         });
 
         const data = await response.json();
-        return data.choices[0].text; // Obtener el texto de la respuesta
+        return data.choices[0].message.content; // Obtener el texto de la respuesta
     }
 
     // Función para enviar mensajes del usuario al chat
@@ -29,15 +29,26 @@ document.addEventListener('DOMContentLoaded', function () {
         appendMessage('Usuario', userMessage);
 
         if (!userMessage) {
-            // Si el mensaje del usuario está vacío, no hacemos nada
             return;
         }
 
-        // Llamar a la función de OpenAI para obtener la respuesta del modelo
-        var botResponse = await getCompletion(userMessage);
+        // Definir los mensajes del sistema y del usuario
+        var messages = [
+            {
+                "role": "system",
+                "content": "You are a compassionate, charismatic, and empathetic artificial intelligence assistant for mental health named Eva, providing services for a mental health association called DREXER. Your task is to be a support for the user, offering advice. In the event that the user is in danger of harming themselves, recommend the professionals at DREXER."
+            },
+            {
+                "role": "user",
+                "content": userMessage
+            }
+        ];
 
-        appendMessage('Chatbot', botResponse);
-        userInput.value = ''; // Limpiar el campo de entrada después de enviar el mensaje
+        // Llamar a la función de OpenAI para obtener la respuesta del modelo
+        var botResponse = await getCompletion(messages);
+
+        appendMessage('EVA', botResponse);
+        userInput.value = '';
     }
 
     // Función para agregar mensajes al cuadro de chat
@@ -59,4 +70,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
