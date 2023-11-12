@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
     appendMessage('EVA', 'Inicia una conversación con EVA');
-    const API_KEY = "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";
+    const API_KEY = "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";
 
     async function getCompletion(messages) {
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
@@ -15,13 +15,44 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: messages,
-                max_tokens: 300, // Ajusta este valor según lo que consideres apropiado
+                max_tokens: 2000, // Ajusta este valor según lo que consideres apropiado
             }),
-        });
+        }); 
 
         const data = await response.json();
         return data.choices[0].message.content; // Obtener el texto de la respuesta
     }
+
+    // Función para mostrar el indicador de escritura con puntos progresivos
+    function showTypingIndicator() {
+        var messageContainer = document.createElement('div');
+        messageContainer.classList.add('message-container');
+
+        var messageElement = document.createElement('div');
+        messageElement.classList.add('bot-message');
+
+        var bubbleElement = document.createElement('div');
+        bubbleElement.classList.add('message-bubble', 'bot-bubble');
+
+        var dots = 1;
+
+        function updateDots() {
+            bubbleElement.innerHTML = '.'.repeat(dots);
+            dots = (dots % 3) + 1; // Cambiar entre 1, 2 y 3
+            setTimeout(updateDots, 500); // Cambia cada 500ms (ajusta según tu preferencia)
+        }
+
+        updateDots(); // Iniciar la secuencia de puntos
+        messageElement.appendChild(bubbleElement);
+        messageContainer.appendChild(messageElement);
+
+        chatBox.appendChild(messageContainer);
+        // Hacer scroll hacia abajo para mostrar el último mensaje
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+
+
 
     // Función para enviar mensajes del usuario al chat
     async function sendMessage() {
@@ -31,6 +62,12 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!userMessage) {
             return;
         }
+
+        userInput.value = '';
+
+        // Mostrar indicador de escritura progresiva mientras el bot responde
+        showTypingIndicator();
+
 
         // Definir los mensajes del sistema y del usuario
         var messages = [
@@ -47,9 +84,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // Llamar a la función de OpenAI para obtener la respuesta del modelo
         var botResponse = await getCompletion(messages);
 
+        var timer = setTimeout(function () {
+            // Acciones a realizar después de 15 segundos (por ejemplo, mostrar un mensaje especial)
+            appendMessage('EVA', 'Ha ocurrido un error en la respuesta, inténtalo de nuevo.');
+        }, 10000);
+
+        // Eliminar el indicador de escritura antes de mostrar la respuesta real
+        chatBox.lastChild.remove();
+
         appendMessage('EVA', botResponse);
-        userInput.value = '';
     }
+
+
+
+
+
 
     // Función para agregar mensajes al cuadro de chat
     function appendMessage(sender, message) {
