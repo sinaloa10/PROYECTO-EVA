@@ -69,10 +69,10 @@ body {
     border-radius: 20px;
 }
 
-#chat-box::-webkit-scrollbar{
+.chat-box::-webkit-scrollbar{
     width: 9px;
 }
-#chat-box::-webkit-scrollbar-thumb{
+.chat-box::-webkit-scrollbar-thumb{
     background: #af4c8c;
     border-radius: 10px;
 }
@@ -112,7 +112,7 @@ body {
 }
 
 
-#user-input {
+.user-input {
     width: 54.5%;
     padding: 8px;
     height: 2%;
@@ -138,13 +138,13 @@ button {
     border-radius: 10px;
 }
 
-#btn_enviar{
+.btn_enviar{
     background-color: #d47ccf;
     font-family: 'Bahnschrift Light';
     color: white;
     font-size: 17px;
 }
 
-#btn_enviar:hover {
+.btn_enviar:hover {
     background: rgb(173, 46, 160);
     }
