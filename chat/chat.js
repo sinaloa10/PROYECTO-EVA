@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
 
-//api
+    const API_KEY = "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";
 
     async function getCompletion(messages) {
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
                 messages: messages,
-                max_tokens: 150, // Ajusta este valor según lo que consideres apropiado
+                max_tokens: 300, // Ajusta este valor según lo que consideres apropiado
             }),
         });
 
