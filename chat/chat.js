@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
     appendMessage('EVA', 'Inicia una conversación con EVA');
-    const API_KEY = "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";
+    const API_KEY = "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";
 
     async function getCompletion(messages) {
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Mostrar indicador de escritura progresiva mientras el bot responde
         showTypingIndicator();
 
+
         // Definir los mensajes del sistema y del usuario
         var messages = [
             {
@@ -81,34 +82,13 @@ document.addEventListener('DOMContentLoaded', function () {
         ];
 
         // Llamar a la función de OpenAI para obtener la respuesta del modelo
-        var botResponsePromise = getCompletion(messages);
+        var botResponse = await getCompletion(messages);
 
-        // Configurar temporizador para 10 segundos
-        var timer = new Promise((_, reject) => {
-            setTimeout(() => {
-                reject('timeout');
-            }, 10000);
-        });
+        // Eliminar el indicador de escritura antes de mostrar la respuesta real
+        chatBox.lastChild.remove();
 
-        try {
-            // Esperar a que ocurra una de las dos promesas (respuesta del modelo o temporizador)
-            var result = await Promise.race([botResponsePromise, timer]);
-
-            // Limpiar el temporizador ya que la respuesta llegó a tiempo
-            clearTimeout(timer);
-
-            // Eliminar el indicador de escritura antes de mostrar la respuesta real
-            chatBox.lastChild.remove();
-
-            // Mostrar el mensaje del bot en el chat
-            appendMessage('EVA', result);
-        } catch (error) {
-            // Si se ejecuta este bloque, significa que el temporizador ha expirado
-            // Puedes mostrar un mensaje de error o realizar otra acción aquí
-            appendMessage('EVA', 'Ha ocurrido un error en la respuesta, inténtalo de nuevo.');
-        }
+        appendMessage('EVA', botResponse);
     }
-
 
 
 
