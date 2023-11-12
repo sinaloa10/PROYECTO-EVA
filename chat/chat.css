@@ -6,7 +6,7 @@ body {
 .containerc {
     text-align: center;
     position: absolute;
-    top: 10%;
+    top: 9%;
     left: 5%;
     transform: translate(-50%, -50%);
   }
@@ -29,20 +29,20 @@ body {
 }
 
 .tabla-container {
-    margin-top: 120px; /* altura */
-    margin-left: 20px;
+    margin-top: 110px; /* altura */
+    margin-left: 15px;
 }
 .tabla-container2 {
     margin-top: 30px; /* altura */
-    margin-left: 20px;
+    margin-left: 15px;
 }
 .mi-tabla {
     border-collapse: collapse;
     width: 25%;
 }
 .mi-tabla th, .mi-tabla td {
-    border: 2px solid #b4b4b4;
-    padding: 7px;
+    border-radius: 20px;
+    padding: 9px;
     text-align: center;
     font-size: 14px; 
 }
@@ -60,6 +60,10 @@ body {
     overflow-y: scroll;
     padding: 10px;
     background-color: #f4f4f4;
+
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 20px;
 }
 
 /* Nuevos estilos para los mensajes */
