@@ -18,7 +18,7 @@ body {
     margin-bottom: 20px;
   }
 
-#chat-container {
+.chat-container {
     width: 54.5%;
     margin: 0px auto;
     border: 1px solid #ccc;
@@ -52,7 +52,7 @@ body {
     background-color: #f2f2f2;
 }
 
-#chat-box {
+.chat-box {
     font-size: 22px;
     height: 430px;
     width: 70%;
