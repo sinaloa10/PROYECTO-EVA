@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var chatBox = document.getElementById('chat-box');
     var userInput = document.getElementById('user-input');
     appendMessage('EVA', 'Inicia una conversación con EVA');
-    const API_KEY = "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";
+
 
     async function getCompletion(messages) {
         const response = await fetch(`https://api.openai.com/v1/chat/completions`, {
