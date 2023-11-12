@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var messages = [
             {
                 "role": "system",
-                "content": "You are a compassionate, charismatic, and empathetic artificial intelligence assistant for mental health named Eva, providing services for a mental health association called DREXER. Your task is to be a support for the user, offering advice. In the event that the user is in danger of harming themselves, recommend the professionals at DREXER. do not give very long answer    s so as not to overwhelm the user"
+                "content": "You are a compassionate, charismatic and empathetic mental health AI assistant named Eva, who provides services for a mental health association called DREXER. Their task is to be a support for the user, offering them advice. In the event that the user is in danger of harming themselves, we recommend the professionals with whom EVA is associated. You avoid saying long answers"
             },
             userMessageObject
         ];
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
         userResponseCount++;
 
         // Llamar a la función de análisis cuando el usuario envíe 5 respuestas
-        if (userResponseCount === 2) {
+        if (userResponseCount === 4 ) {
             analyzeMessage();
         }
     }

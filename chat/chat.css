@@ -135,3 +135,14 @@ button {
     -moz-border-radius: 28;
     border-radius: 10px;
 }
+
+#btn_enviar{
+    background-color: #d47ccf;
+    font-family: 'Bahnschrift Light';
+    color: white;
+    font-size: 17px;
+}
+
+#btn_enviar:hover {
+    background: rgb(173, 46, 160);
+    }
